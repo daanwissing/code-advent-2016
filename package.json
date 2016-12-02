@@ -1,0 +1,11 @@
+{
+  "name": "code-event",
+  "version": "1.0.0",
+  "description": "code solutions for Advent Of Code",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC"
+}
