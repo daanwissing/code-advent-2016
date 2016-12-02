@@ -4,7 +4,8 @@ module.exports = function () {
 
   this.visited = [[0]];
 
-  this.intersection = [];
+  this.intersection = 0;
+  this.foundIntersection = false;
 
   this.directionIndex = 0; 
   this.X = 0;
@@ -46,9 +47,9 @@ module.exports = function () {
   };
 
   this.addVisited = (x,y) => {
-    if (this.visitedBefore(x,y)) {
-      console.log("X => " + x, " Y => " + y);
-      this.intersection[x] = [y];
+    if (this.visitedBefore(x,y) && !this.foundIntersection) {
+      this.intersection = Math.abs(x) + Math.abs(y);
+      this.foundIntersection = true;
     }
 
     if (this.visited[x] === null || this.visited[x] === undefined) {
@@ -92,8 +93,9 @@ module.exports = function () {
   this.run = () => {
     let input = fs.readFileSync('advents/input/1a.txt', 'utf8');
     let result = this.solve(input);
+    console.log("Distance on map: " + result);
 
-    console.log(result);
+    console.log("True distance:" + this.intersection)
   }
 };
 

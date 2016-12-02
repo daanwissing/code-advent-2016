@@ -25,7 +25,7 @@ describe('1a.js', () => {
     it ('should find an intersection when given R1, R1, R1, R1', () => {
       var s = new sol();
       var result = s.solve('R1, R1, R1, R1');
-      assert.equal(s.intersection.length, 1);
+      assert.equal(s.intersection, 0);
 
     })
   })
