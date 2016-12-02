@@ -11,4 +11,4 @@ if (!fs.existsSync('advents/' + advent_id + '.js')) throw 'Event ' + advent_id +
 // Include the event, running it immediately
 var Sol = require('./advents/' + advent_id);
 var adv = new Sol();
-adv.solve();
+adv.run();

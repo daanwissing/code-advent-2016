@@ -2,7 +2,9 @@
 const fs = require('fs');
 module.exports = function () {
 
-  this.visited = [];
+  this.visited = [[0]];
+
+  this.intersection = [];
 
   this.directionIndex = 0; 
   this.X = 0;
@@ -16,65 +18,66 @@ module.exports = function () {
     }
   };
 
+  this.hasVisited = (x,y) => {
+    if (this.visited[x] === null || this.visited[x] === undefined) {
+      return false;
+    }
+  };
+
+  this.visitedBefore = (x,y) => {
+    if (this.visited[x] !== null && this.visited[x] !== undefined) {
+      if (this.visited[x].indexOf(y) >= 0) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  this.addVisitedInLine = (amount) => {
+    for (var i = 1; i <= amount; ++i) {
+      switch(this.directionIndex) {
+
+        case 0: this.addVisited(this.X + i, this.Y); break;
+        case 1: this.addVisited(this.X, this.Y + i); break;
+        case 2: this.addVisited(this.X - i, this.Y); break;
+        case 3: this.addVisited(this.X, this.Y - i); break;
+      }
+    }
+  };
+
+  this.addVisited = (x,y) => {
+    if (this.visitedBefore(x,y)) {
+      console.log("X => " + x, " Y => " + y);
+      this.intersection[x] = [y];
+    }
+
+    if (this.visited[x] === null || this.visited[x] === undefined) {
+      this.visited[x] = [];
+    }
+    this.visited[x].push(y);
+  };
+
   this.move = (amount) => {
+    this.addVisitedInLine(amount);
     switch(this.directionIndex) {
-      // case 0: // North
-      //   for (var i = 0; i <= amount; ++i) {
-      //     this.X++
-      //     if (this.visited.indexOf([this.X, this.Y]) > -1) {
-      //       console.log("Found! " + this.X + " - " + this.Y);
-      //     }
-      //     this.visited.push([this.X, this.Y]);
-      //   }
-      //   break;
-      // case 1: // East
-      //   for (var i = 0; i <= amount; ++i) {
-      //     this.Y++;
-      //     if (this.visited.indexOf([this.X, this.Y]) > -1) {
-      //       console.log("Found! " + this.X + " - " + this.Y);
-      //     }
-      //     this.visited.push([this.X, this.Y]);
-      //   }
-      //   break;
-      // case 2: // South
-      //   for (var i = 0; i <= amount; ++i) {
-      //     this.X--;
-      //     if (this.visited.indexOf([this.X, this.Y]) > -1) {
-      //       console.log("Found! " + this.X + " - " + this.Y);
-      //     }
-      //     this.visited.push([this.X, this.Y]);
-      //   }
-      //   break;
-      // case 3: // West
-      //   for (var i = 0; i <= amount; ++i) {
-      //     this.Y--;
-      //     if (this.visited.indexOf([this.X, this.Y]) > -1) {
-      //       console.log("Found! " + this.X + " - " + this.Y);
-      //     }
-      //     this.visited.push([this.X, this.Y]);
-      //   }
-      //   break;
-      case 0:
+      case 0: // North
         this.X += amount;
         break;
-      case 1:
+      case 1: // East
         this.Y += amount;
         break;
-      case 2:
+      case 2: // South
         this.X -= amount;
         break;
-      case 3:
+      case 3: // West
         this.Y -= amount;
         break;
     }
   };
 
-  this.solve = () => {
-    // Read input
-    let input = fs.readFileSync('advents/input/1a.txt', 'utf8');
-
+  this.solve = (directionsString) => {
     // Split into an array
-    let directions = input.split(', ');
+    let directions = directionsString.split(', ');
 
     this.directionIndex = 0;
 
@@ -83,7 +86,14 @@ module.exports = function () {
       this.changeDirection(instruction[0]);
       this.move(parseInt(instruction.substr(1)));
     }
-    return [this.X, this.Y];
+    return Math.abs(this.X) + Math.abs(this.Y);
+  }
+
+  this.run = () => {
+    let input = fs.readFileSync('advents/input/1a.txt', 'utf8');
+    let result = this.solve(input);
+
+    console.log(result);
   }
 };
 

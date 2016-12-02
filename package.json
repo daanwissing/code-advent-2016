@@ -4,7 +4,8 @@
   "description": "code solutions for Advent Of Code",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "watch:test": "mocha --watch"
   },
   "author": "",
   "license": "ISC"
