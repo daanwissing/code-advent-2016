@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "code solutions for Advent Of Code",
   "main": "index.js",
+  "repository": "https://github.com/daanwissing/code-advent-2016.git",
   "scripts": {
     "test": "mocha",
     "watch:test": "mocha --watch"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Daan Wissing",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
 }
