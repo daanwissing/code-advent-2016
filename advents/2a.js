@@ -27,7 +27,7 @@ module.exports = function () {
   }
 
   this.run = () => {
-    let input = fs.readFileSync('advents/input/1b.txt', 'utf8');
+    let input = fs.readFileSync('advents/input/2a.txt', 'utf8');
     let result = this.solve(input);
 
     console.log('Result: ' + result);
