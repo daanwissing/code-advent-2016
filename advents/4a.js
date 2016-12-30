@@ -1,12 +1,34 @@
 'use strict'
 const fs = require('fs');
 module.exports = function () {
+
+	this.run = () => {
+    let input = fs.readFileSync('advents/input/4a.txt', 'utf8');
+    let result = this.solve(input);
+
+    console.log('Result: ' + result);
+	}
+
+	this.solve = (rooms) => {
+		var roomNames = rooms.split('\n');
+		var sectorSum = 0;
+		roomNames.forEach((roomName) => {
+			if (this.isRealRoom(roomName)) {
+				sectorSum += parseInt(this.getSectorId(roomName));
+			}
+		});
+
+		return sectorSum;
+	}
+
 	this.isRealRoom = (roomName) => {
 		var encryptedName = this.getEncryptedName(roomName);
 		var checkSum = this.getChecksum(roomName);
 		var tally = this.getTalliedCharacters(encryptedName);
 		var sorted = this.getSortedTally(tally);
-		return checkSum == sorted.substr(0, 4);
+		var sub = sorted.substr(0,5);
+		console.log(checkSum + ' == ' + sub);
+		return checkSum == sub;
 	}
 
 	this.getEncryptedName = (roomName) => {
@@ -20,14 +42,17 @@ module.exports = function () {
 	}
 
 	this.getChecksum = (roomName) => {
+		console.log
 		var split = roomName.split("-");
 		var tail = split[split.length - 1];
-		return tail.substring(tail.indexOf("[") + 1, tail.length - 1);
+		return tail.substring(tail.indexOf("[") + 1, tail.indexOf("]"));
 	}
 
 	this.getTalliedCharacters = (word) => {
 		var result = {};
+
 		for(var char of word) {
+			if (!char.match(/[a-zA-Z]/)) continue;
 			if (result[char] == undefined) result[char] = 0;
 			result[char]++;
 		}
@@ -72,22 +97,29 @@ module.exports = function () {
 		var j = 0;
 		var result = [];
 		while((i + j) < (array1.length + array2.length)) {
+
 			if (j >= array2.length) {
-				result.push(array1[i]);
-				i++;
-				continue;				
-			}
-			if (i >= array1.length) {
-				result.push(array2[j]);
-				j++;
+				result.push(array1[i++]);
 				continue;
 			}
-			if (array1[i].val >= array2[j].val) {
-				result.push(array1[i]);
-				i++;
+			if (i >= array1.length) {
+				result.push(array2[j++]);
+				continue;
+			}
+
+			if (array1[i].val > array2[j].val) {
+				result.push(array1[i++]);
+				continue;
+			}
+			if (array2[j].val > array1[i].val) {
+				result.push(array2[j++]);
+				continue;
+			}
+
+			if (array1[i].char.charCodeAt() < array2[j].char.charCodeAt()){
+				result.push(array1[i++]);				
 			} else {
-				result.push(array2[j]);
-				j++;
+				result.push(array2[j++]);
 			}
 		}
 

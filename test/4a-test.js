@@ -10,6 +10,13 @@ describe('4a.js', () => {
     	var result = s.isRealRoom(input);
     	assert.equal(expected, result);
 		});
+    it('should return true on input "a-b-c-d-e-f-g-h-987[abcde]"', () => {
+    	var s = new sol();
+    	var input = "a-b-c-d-e-f-g-h-987[abcde]";
+    	var expected = true;
+    	var result = s.isRealRoom(input);
+    	assert.equal(expected, result);
+		});
     it('should return false on input "aaaaa-bbb-z-y-x-123[abxyz]"', () => {
     	var s = new sol();
     	var input = "totally-real-room-200[decoy]";
@@ -147,6 +154,16 @@ describe('4a.js', () => {
 			var result = s.getTalliedCharacters(input);
 			assert.deepEqual(expected, result);			
 		});
+
+		it('should return {a:1, b:2} for input a-b', () => {
+			var s = new sol();
+			var input = "a-b";
+			var expected = {a:1, b:1};
+
+			var result = s.getTalliedCharacters(input);
+			assert.deepEqual(expected, result);			
+
+		})
 	});
 
 	describe('getSectorId()', () => {
@@ -158,5 +175,5 @@ describe('4a.js', () => {
 			var result = s.getSectorId(input);
 			assert.equal(expected, result);
 		})
-	})
+	});
 });
