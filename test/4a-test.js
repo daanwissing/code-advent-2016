@@ -176,4 +176,71 @@ describe('4a.js', () => {
 			assert.equal(expected, result);
 		})
 	});
+
+	describe('cipherWordWith', () => {
+		it('should return bcd for inputs abc, 1', () => {
+			var s = new sol();
+			var cipher = "abc";
+			var shift = 1;
+			var expected = "bcd";
+
+			var result = s.cipherWordWith(cipher, shift);
+			assert.equal(expected, result);
+
+		})
+
+		it('should return ghi for inputs abc, 6', () => {
+			var s = new sol();
+			var cipher = "abc";
+			var shift = 6;
+			var expected = "ghi";
+
+			var result = s.cipherWordWith(cipher, shift);
+			assert.equal(expected, result);
+
+		})
+
+		it('should return "very encrypted name" for inputs qzmt-zixmtkozy-ivhz, 343', () => {
+			var s = new sol();
+			var cipher = "qzmt-zixmtkozy-ivhz";
+			var shift = 343;
+			var expected = "very encrypted name";
+
+			var result = s.cipherWordWith(cipher, shift);
+			assert.equal(expected, result);
+
+		})
+
+		it('should return gh i for inputs ab-c, 6', () => {
+			var s = new sol();
+			var cipher = "abc";
+			var shift = 6;
+			var expected = "ghi";
+
+			var result = s.cipherWordWith(cipher, shift);
+			assert.equal(expected, result);
+		})
+
+		it('should return ghi for inputs abc, 32', () => {
+			var s = new sol();
+			var cipher = "abc";
+			var shift = 32;
+			var expected = "ghi";
+
+			var result = s.cipherWordWith(cipher, shift);
+			assert.equal(expected, result);
+
+		})
+	})
+
+	describe('decryptName()', () => {
+		it('should return "very encrypted name" for input	qzmt-zixmtkozy-ivhz-343[xyz]', () => {
+			var s = new sol();
+			var roomName = "qzmt-zixmtkozy-ivhz-343[xyz]";
+			var expected = "very encrypted name";
+
+			var result = s.decryptName(roomName);
+			assert.equal(expected, result);
+		})
+	})
 });

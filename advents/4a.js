@@ -14,7 +14,10 @@ module.exports = function () {
 		var sectorSum = 0;
 		roomNames.forEach((roomName) => {
 			if (this.isRealRoom(roomName)) {
-				sectorSum += parseInt(this.getSectorId(roomName));
+				var sectorId = this.getSectorId(roomName)
+				sectorSum += sectorId;
+
+				console.log("SectorId: " + sectorId + " => " + this.decryptName(roomName))
 			}
 		});
 
@@ -27,7 +30,6 @@ module.exports = function () {
 		var tally = this.getTalliedCharacters(encryptedName);
 		var sorted = this.getSortedTally(tally);
 		var sub = sorted.substr(0,5);
-		console.log(checkSum + ' == ' + sub);
 		return checkSum == sub;
 	}
 
@@ -38,7 +40,7 @@ module.exports = function () {
 	this.getSectorId = (roomName) => {
 		var split = roomName.split("-");
 		var tail = split[split.length - 1];
-		return tail.substr(0,tail.indexOf("["));
+		return parseInt(tail.substr(0,tail.indexOf("[")));
 	}
 
 	this.getChecksum = (roomName) => {
@@ -124,6 +126,29 @@ module.exports = function () {
 		}
 
 		return result
+	}
+
+	this.decryptName = (roomName) => {
+		var encryptedName = this.getEncryptedName(roomName);
+		var shift = this.getSectorId(roomName);
+		return this.cipherWordWith(encryptedName, shift);
+	}
+
+	this.cipherWordWith = (cipher, shift) => {
+		var alphabet = "abcdefghijklmnopqrstuvwxyz";
+		var cipheredText = "";
+		for (var char of cipher) {
+			var currentAlphabetIndex = alphabet.indexOf(char);
+			if (currentAlphabetIndex < 0) {
+				cipheredText += " ";
+				continue;
+			}
+
+			var nextAlphabetIndex = (currentAlphabetIndex + shift) % alphabet.length;
+			cipheredText += alphabet[nextAlphabetIndex];
+		}
+
+		return cipheredText;
 	}
 
 }
