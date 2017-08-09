@@ -27,7 +27,7 @@ describe('5a.js', () => {
       assert.equal(expected, output);
     });
   });
-  describe('getPassword', () => {
+  xdescribe('getPassword', () => {
     it('should return "1" for door "abc" and length 1', () => {
       var s = new sol();
       var input = "abc";
