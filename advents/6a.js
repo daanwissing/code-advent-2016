@@ -34,6 +34,19 @@ module.exports = function() {
     }, []);
   };
 
+  this.getLeastCommonCharAt = (charCount, index) => {
+    var count = charCount[index];
+    var min = Number.MAX_VALUE;
+    var foundChar = '_';
+    for(var char in count) {
+      if (count[char] < min) {
+        min = count[char];
+        foundChar = char;
+      }
+    }
+    return foundChar;
+  };
+
   this.getMostCommonCharAt = (charCount, index) => {
     var count = charCount[index];
     var max = 0;
@@ -47,11 +60,14 @@ module.exports = function() {
     return foundChar;
   };
 
-  this.getAverageString = (strings) => {
+  this.getAverageString = (strings, least) => {
     var totalCounts = this.sumOccurrences(strings);
-    console.log
     var commonChars = totalCounts.map((count, index) => {
-      return this.getMostCommonCharAt(totalCounts, index);
+      if (least) {
+        return this.getLeastCommonCharAt(totalCounts, index);
+      } else {
+        return this.getMostCommonCharAt(totalCounts, index);
+      }
     });
 
     return commonChars.join("");
@@ -59,13 +75,15 @@ module.exports = function() {
 
   this.run = () => {
     let input = fs.readFileSync('advents/input/6a.txt', 'utf8');
-    let result = this.solve(input);
-    console.log("Average: " + result)
+    let result = this.solve(input, false);
+    console.log("Most common: " + result)
+    result = this.solve(input, true);
+    console.log("Least common: " + result)
   }
 
-  this.solve = (input) => {
+  this.solve = (input, least) => {
     var strings = input.split('\n');
-    return this.getAverageString(strings);
+    return this.getAverageString(strings, least);
   }
 
 };
