@@ -7,7 +7,7 @@ module.exports = function() {
     let input = fs.readFileSync('advents/input/5a.txt', 'utf8');
     let result = this.solve(input);
 
-    console.log('Result: ' + result);
+    console.log('5a: Result: ' + result);
   }
 
   this.solve = (input) => {
@@ -22,7 +22,6 @@ module.exports = function() {
       var hash = this.md5(hashInput);
       if (this.isInterestingHash(hash)){
         password += hash[5];
-        console.log(password);
       }
       ++i;
     }
@@ -31,7 +30,7 @@ module.exports = function() {
 
   this.isInterestingHash = (hash) => {
     return hash.substr(0,5) === "00000";
-  }  
+  }
 
   this.md5 = (input) => {
     let md5sum = crypto.createHash('md5');

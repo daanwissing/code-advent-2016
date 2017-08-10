@@ -29,7 +29,6 @@ module.exports = function () {
 				sides.push(parsed);
 			}
 		});
-		console.log(sides)
 		return sides;
 	};
 
@@ -44,6 +43,6 @@ module.exports = function () {
     input = input.replace("  ", " ");
     let result = this.solve(input);
 
-    console.log('Result: ' + result);
+    console.log('3a: Result: ' + result);
 	}
 };

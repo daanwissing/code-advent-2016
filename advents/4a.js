@@ -6,7 +6,7 @@ module.exports = function () {
     let input = fs.readFileSync('advents/input/4a.txt', 'utf8');
     let result = this.solve(input);
 
-    console.log('Result: ' + result);
+    console.log('4a: Result: ' + result);
 	}
 
 	this.solve = (rooms) => {
@@ -16,8 +16,6 @@ module.exports = function () {
 			if (this.isRealRoom(roomName)) {
 				var sectorId = this.getSectorId(roomName)
 				sectorSum += sectorId;
-
-				console.log("SectorId: " + sectorId + " => " + this.decryptName(roomName))
 			}
 		});
 
@@ -44,7 +42,6 @@ module.exports = function () {
 	}
 
 	this.getChecksum = (roomName) => {
-		console.log
 		var split = roomName.split("-");
 		var tail = split[split.length - 1];
 		return tail.substring(tail.indexOf("[") + 1, tail.indexOf("]"));

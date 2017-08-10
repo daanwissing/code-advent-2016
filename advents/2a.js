@@ -30,6 +30,6 @@ module.exports = function () {
     let input = fs.readFileSync('advents/input/2a.txt', 'utf8');
     let result = this.solve(input);
 
-    console.log('Result: ' + result);
+    console.log('2a: Result: ' + result);
   };
 }

@@ -93,9 +93,9 @@ module.exports = function () {
   this.run = () => {
     let input = fs.readFileSync('advents/input/1a.txt', 'utf8');
     let result = this.solve(input);
-    console.log("Distance on map: " + result);
+    console.log("1a: Distance on map: " + result);
 
-    console.log("True distance:" + this.intersection)
+    console.log("1b: True distance:" + this.intersection)
   }
 };
 
