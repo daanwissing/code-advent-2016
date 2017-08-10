@@ -53,10 +53,82 @@ module.exports = function() {
     }, 0);
   }
 
+  this.isAba = (possibleAba) => {
+    return possibleAba[0] === possibleAba[2]
+      && possibleAba[0] !== possibleAba[1];
+  }
+
+  this.getBabs = (IP) => {
+    var hypernets = this.getHypernets(IP);
+    var abas = [];
+    hypernets.forEach((hypernet) => {
+      for (var i = 0; i < hypernet.length - 2; ++i) {
+        var possibleAba = hypernet.substr(i,3);
+        if(this.isAba(possibleAba)) {
+          abas.push(possibleAba);
+        }
+      }
+    });
+    return abas;
+  }
+
+  this.hasAba = (source, aba) => {
+    var bab = this.reverseAba(aba);
+    return source.indexOf(bab) >= 0;
+  }
+
+  this.reverseAba = (aba) => {
+    return aba[1] + aba[0] + aba[1];
+  }
+
+  this.getNonHypernet = (IP) => {
+    var indexOfStart = 0;
+    var indexOfEnd = IP.indexOf("[");
+    if (indexOfEnd < 0) return IP;
+    return IP.substring(indexOfStart , indexOfEnd);
+  };
+
+  this.getNonHypernets = (IP) => {
+    var subparts = IP.split("]");
+    var nets = [];
+    subparts.forEach((part) => {
+      if (part !== "") {
+        nets.push(this.getNonHypernet(part));
+      }
+    });
+    return nets;
+  }
+
+  this.supportsSSL = (IP) => {
+    var nonHypernets = this.getNonHypernets(IP);
+    var babs = this.getBabs(IP);
+    var result = false;
+    babs.forEach((bab) => {
+      nonHypernets.forEach((nonHypernet) => {
+        if (this.hasAba(nonHypernet, bab)) {
+          result = true;
+        }
+      });
+    });
+    return result;
+  };
+
+  this.countSSLAddresses = (input) => {
+    var strings = input.split('\n');
+    return strings.reduce((total, address) => {
+      if (this.supportsSSL(address)) {
+        return total + 1;
+      };
+      return total;
+    }, 0);
+  }
+
   this.run = () => {
     let input = fs.readFileSync('advents/input/7.txt', 'utf8');
     let result = this.solve(input);
-    console.log("Number of TLS addresses: " + result)
+    let numSSL = this.countSSLAddresses(input);
+    console.log("7a: Number of TLS addresses: " + result);
+    console.log("7b: Number of SSL addresses: " + numSSL);
   }
 
   this.solve = (input) => {

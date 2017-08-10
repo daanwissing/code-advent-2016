@@ -176,4 +176,128 @@ describe('7.js', () => {
       assert.deepEqual(expected, output);
     });
   });
+  describe('getBabs', () => {
+    it('should return ["aba"] for "[aba]"', () => {
+      let s = new sol();
+      let input = "[aba]";
+      let expected = ["aba"];
+      let output = s.getBabs(input);
+      assert.deepEqual(expected, output);
+    });
+    it('should return ["aba", "bab"] for "[abab]"', () => {
+      let s = new sol();
+      let input = "[abab]";
+      let expected = ["aba", "bab"];
+      let output = s.getBabs(input);
+      assert.deepEqual(expected, output);
+    });
+    it('should return ["bcb"] for "aba[bcb]"', () => {
+      let s = new sol();
+      let input = "aba[bcb]";
+      let expected = ["bcb"];
+      let output = s.getBabs(input);
+      assert.deepEqual(expected, output);
+    });
+
+  });
+  describe('isAba', () => {
+    it('should return true for "aba"', () => {
+      let s = new sol();
+      let input = "aba";
+      let expected = true;
+      let output = s.isAba(input);
+      assert.deepEqual(expected, output);
+    });
+    it('should return false for "abc"', () => {
+      let s = new sol();
+      let input = "abc";
+      let expected = false;
+      let output = s.isAba(input);
+      assert.deepEqual(expected, output);
+    });
+    it('should return false for "bbb"', () => {
+      let s = new sol();
+      let input = "bbb";
+      let expected = false;
+      let output = s.isAba(input);
+      assert.deepEqual(expected, output);
+    });
+  });
+  describe('hasAba', () => {
+    it('should return true for "aba", "bab"', () => {
+      let s = new sol();
+      let input1 = "aba";
+      let input2 = "bab"
+      let expected = true;
+      let output = s.hasAba(input1, input2);
+      assert.deepEqual(expected, output);
+    });
+    it('should return false for "aba", "aba"', () => {
+      let s = new sol();
+      let input1 = "aba";
+      let input2 = "aba"
+      let expected = false;
+      let output = s.hasAba(input1, input2);
+      assert.deepEqual(expected, output);
+    });
+  });
+  describe('reverseAba', () => {
+    it('should return "bab" for "aba"', () => {
+      let s = new sol();
+      let input = "aba";
+      let expected = "bab";
+      let output = s.reverseAba(input);
+      assert.deepEqual(expected, output);
+    });
+  });
+  describe('getNonHypernet', () => {
+    it('should return "abc" on "abc[def]"', () => {
+      let s = new sol();
+      let input = "abc[def]";
+      let expected = "abc";
+      let output = s.getNonHypernet(input);
+      assert.deepEqual(expected, output);
+    });
+  });
+  describe('getNonHypernets', () => {
+    it('should return ["abc"] on "abc[def]ghi"', () => {
+      let s = new sol();
+      let input = "abc[def]ghi";
+      let expected = ["abc", "ghi"];
+      let output = s.getNonHypernets(input);
+      assert.deepEqual(expected, output);
+    });
+  });
+
+  describe('supportsSSL', () => {
+    it('should return true on "aba[bab]xyz"', () => {
+      let s = new sol();
+      let input = "aba[bab]xyz";
+      let expected = true;
+      let output = s.supportsSSL(input);
+      assert.equal(expected, output);
+    });
+    it('should return false on "xyx[xyx]xyx"', () => {
+      let s = new sol();
+      let input = "xyx[xyx]xyx";
+      let expected = false;
+      let output = s.supportsSSL(input);
+      assert.equal(expected, output);
+    });
+    it('should return true on "aaa[kek]eke"', () => {
+      let s = new sol();
+      let input = "aaa[kek]eke";
+      let expected = true;
+      let output = s.supportsSSL(input);
+      assert.equal(expected, output);
+    });
+    it('should return true on "zazbz[bzb]cdb"', () => {
+      let s = new sol();
+      let input = "zazbz[bzb]cdb";
+      let expected = true;
+      let output = s.supportsSSL(input);
+      assert.equal(expected, output);
+    });
+  });
+
 });

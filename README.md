@@ -15,4 +15,4 @@ Run an individual solution:
 4|solved|solved
 5|solved
 6|solved|solved
-7|solved|
+7|solved|solved
