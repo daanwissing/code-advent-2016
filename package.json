@@ -5,6 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/daanwissing/code-advent-2016.git",
   "scripts": {
+    "start": "node index.js",
     "test": "mocha",
     "watch:test": "mocha --watch"
   },
