@@ -234,7 +234,7 @@ describe('4a.js', () => {
 	})
 
 	describe('decryptName()', () => {
-		it('should return "very encrypted name" for input	qzmt-zixmtkozy-ivhz-343[xyz]', () => {
+		it('should return "very encrypted name" for input qzmt-zixmtkozy-ivhz-343[xyz]', () => {
 			var s = new sol();
 			var roomName = "qzmt-zixmtkozy-ivhz-343[xyz]";
 			var expected = "very encrypted name";

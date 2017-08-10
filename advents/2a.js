@@ -19,7 +19,7 @@ module.exports = function () {
       if (direction === 'D') this.keypadX = Math.min(2, this.keypadX + 1);
       if (direction === 'U') this.keypadX = Math.max(0, this.keypadX - 1);
       if (direction === 'L') this.keypadY = Math.max(0, this.keypadY - 1);
-      if (direction === 'R') this.keypadY = Math.min(2, this.keypadY + 1);      
+      if (direction === 'R') this.keypadY = Math.min(2, this.keypadY + 1);
       if (direction === '\n') this.numbers += this.keypadMatrix[this.keypadX][this.keypadY];
     }
     this.numbers += this.keypadMatrix[this.keypadX][this.keypadY];

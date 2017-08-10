@@ -2,11 +2,14 @@
 const fs = require('fs');
 module.exports = function () {
 
+	this.roomId = 0;
+
 	this.run = () => {
     let input = fs.readFileSync('advents/input/4a.txt', 'utf8');
     let result = this.solve(input);
 
-    console.log('4a: Result: ' + result);
+    console.log('4a: SectorId sum: ' + result);
+    console.log('4b: RoomId of storage:' + this.roomId);
 	}
 
 	this.solve = (rooms) => {
@@ -14,7 +17,10 @@ module.exports = function () {
 		var sectorSum = 0;
 		roomNames.forEach((roomName) => {
 			if (this.isRealRoom(roomName)) {
-				var sectorId = this.getSectorId(roomName)
+				var sectorId = this.getSectorId(roomName);
+				if (this.decryptName(roomName) === 'northpole object storage'){
+					this.roomId = sectorId;
+				}
 				sectorSum += sectorId;
 			}
 		});
@@ -116,7 +122,7 @@ module.exports = function () {
 			}
 
 			if (array1[i].char.charCodeAt() < array2[j].char.charCodeAt()){
-				result.push(array1[i++]);				
+				result.push(array1[i++]);
 			} else {
 				result.push(array2[j++]);
 			}
