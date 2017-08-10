@@ -1,7 +1,7 @@
 var assert = require('assert');
-var sol = require('../advents/4a.js');
+var sol = require('../advents/4.js');
 
-describe('4a.js', () => {
+describe('4.js', () => {
   describe('isRealRoom()', () => {
     it('should return true on input "aaaaa-bbb-z-y-x-123[abxyz]"', () => {
     	var s = new sol();

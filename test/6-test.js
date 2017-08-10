@@ -1,6 +1,6 @@
 var assert = require('assert');
-var sol = require('../advents/6a.js');
-describe('6a.js', () => {
+var sol = require('../advents/6.js');
+describe('6.js', () => {
   describe('convertToCharCount', () => {
     it('should return [ {a:1}, {b:1} ] for "ab"', () => {
       var s = new sol();

@@ -1,7 +1,7 @@
 var assert = require('assert');
-var sol = require('../advents/5a.js');
+var sol = require('../advents/5.js');
 
-describe('5a.js', () => {
+describe('5.js', () => {
   describe('md5', () => {
     it('should return 098f6bcd4621d373cade4e832627b4f6 on "test"', ()=> {
       var s = new sol();

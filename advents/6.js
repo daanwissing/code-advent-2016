@@ -76,9 +76,9 @@ module.exports = function() {
   this.run = () => {
     let input = fs.readFileSync('advents/input/6.txt', 'utf8');
     let result = this.solve(input, false);
-    console.log("Most common: " + result)
+    console.log("6a: Most common: " + result)
     result = this.solve(input, true);
-    console.log("Least common: " + result)
+    console.log("6b: Least common: " + result)
   }
 
   this.solve = (input, least) => {

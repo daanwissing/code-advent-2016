@@ -1,7 +1,7 @@
 var assert = require('assert');
-var sol = require('../advents/1a.js');
+var sol = require('../advents/1.js');
 
-describe('1a.js', () => {
+describe('1.js', () => {
   describe('solve()', () => {
     it('should return 2 when given R1 R1', () => {
       var s = new sol();
