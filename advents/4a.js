@@ -5,11 +5,11 @@ module.exports = function () {
 	this.roomId = 0;
 
 	this.run = () => {
-    let input = fs.readFileSync('advents/input/4a.txt', 'utf8');
-    let result = this.solve(input);
+	    let input = fs.readFileSync('advents/input/4.txt', 'utf8');
+	    let result = this.solve(input);
 
-    console.log('4a: SectorId sum: ' + result);
-    console.log('4b: RoomId of storage:' + this.roomId);
+	    console.log('4a: SectorId sum: ' + result);
+	    console.log('4b: RoomId of storage:' + this.roomId);
 	}
 
 	this.solve = (rooms) => {

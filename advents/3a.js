@@ -39,7 +39,7 @@ module.exports = function () {
 	}
 
 	this.run = () => {
-    let input = fs.readFileSync('advents/input/3a.txt', 'utf8');
+    let input = fs.readFileSync('advents/input/3.txt', 'utf8');
     input = input.replace("  ", " ");
     let result = this.solve(input);
 

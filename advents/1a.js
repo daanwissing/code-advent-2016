@@ -91,7 +91,7 @@ module.exports = function () {
   }
 
   this.run = () => {
-    let input = fs.readFileSync('advents/input/1a.txt', 'utf8');
+    let input = fs.readFileSync('advents/input/1.txt', 'utf8');
     let result = this.solve(input);
     console.log("1a: Distance on map: " + result);
 

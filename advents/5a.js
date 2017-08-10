@@ -4,7 +4,7 @@ const fs = require('fs');
 
 module.exports = function() {
   this.run = () => {
-    let input = fs.readFileSync('advents/input/5a.txt', 'utf8');
+    let input = fs.readFileSync('advents/input/5.txt', 'utf8');
     let result = this.solve(input);
 
     console.log('5a: Result: ' + result);
