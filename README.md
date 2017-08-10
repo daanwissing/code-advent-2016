@@ -10,7 +10,7 @@ Run an individual solution:
 |advent| part 1 | part 2|
 |------|--------|-------|
 1|solved|solved
-2|solved
+2|solved|solved
 3|solved
 4|solved|solved
 5|solved
