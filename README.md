@@ -16,3 +16,4 @@ Run an individual solution:
 5|solved
 6|solved|solved
 7|solved|solved
+8|solved|solved
