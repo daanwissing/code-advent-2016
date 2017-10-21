@@ -82,12 +82,19 @@ module.exports = function () {
 
     this.directionIndex = 0;
 
-    for(var i = 0; i < directions.length; ++i) {
-      var instruction = directions[i];
-      this.changeDirection(instruction[0]);
-      this.move(parseInt(instruction.substr(1)));
+    for(let i = 0; i < directions.length; ++i) {
+      let instruction = this.getInstruction(directions[i]);
+      this.changeDirection(instruction.direction);
+      this.move(parseInt(instruction.distance));
     }
     return Math.abs(this.X) + Math.abs(this.Y);
+  }
+
+  this.getInstruction = (instructionString) => {
+    return {
+      direction: instructionString[0],
+      distance : instructionString.substr(1)
+    };
   }
 
   this.run = () => {
