@@ -7,9 +7,9 @@ module.exports = function() {
 
   this.initialize = (x,y) => {
     this.screen = [];
-    for(var i = 0; i < y; ++i) {
-      var row = [];
-      for(var j = 0; j < x; ++j) {
+    for(let i = 0; i < y; ++i) {
+      let row = [];
+      for(let j = 0; j < x; ++j) {
         row.push(this.disabledPixel);
       }
       this.screen.push(row);
@@ -17,8 +17,8 @@ module.exports = function() {
 
   }
   this.setRect = (x,y) => {
-    for(var i = 0; i < y; ++i) {
-      for(var j = 0; j < x; ++j) {
+    for(let i = 0; i < y; ++i) {
+      for(let j = 0; j < x; ++j) {
         this.screen[i][j] = this.enabledPixel;
       }
     }
@@ -28,14 +28,13 @@ module.exports = function() {
     return this.screen;
   }
 
-  this.rotateRow = (rowID, amount) => {
-
-    var row = this.screen[rowID];
-    this.screen[rowID] = this.rotate(row, amount);
+  this.rotateRow = (rowId, amount) => {
+    let row = this.getRow(rowId);
+    this.setRow(rowId, this.rotate(row, amount));
   }
 
   this.rotateColumn = (colId, amount) => {
-    var col = this.getColumn(colId);
+    let col = this.getColumn(colId);
     this.setColumn(colId, this.rotate(col, amount));
   }
 
@@ -52,36 +51,52 @@ module.exports = function() {
     })
   }
 
+  this.getRow = (rowId) => {
+    return this.screen[rowId];
+  }
+
+  this.setRow = (rowId, row) => {
+    this.screen[rowId] = row;
+  }
+
   this.rotate = (array, amount) => {
     amount = amount % array.length;
-    var elements = array.splice(-amount);
+    let elements = array.splice(-amount);
     return elements.concat(array);
   }
 
   this.runCommand = (cmd) => {
-    var args = cmd.split(' ');
-    var func = args[0];
+    let args = cmd.split(' ');
+    let func = args[0];
     if (func === 'rect') {
-      var dimensions = args[1].split('x');
-      var x = parseInt(dimensions[0]);
-      var y = parseInt(dimensions[1]);
-      this.setRect(x,y);
+      this.runRect(args[1]);
     } else if (func === 'rotate') {
-      var id = parseInt(args[2].split('=')[1]);
-      var amount = parseInt(args[4]);
-      if (args[1] === 'column') {
-        this.rotateColumn(id, amount);
-      } else if (args[1] === 'row') {
-        this.rotateRow(id, amount);
+      this.runRotate(args[1], args[2], args[4])
+    }
+  }
+
+  this.runRotate = (dim, index, amountStr) => {
+      let id = parseInt(index.split('=')[1]);
+      let amount = parseInt(amountStr);
+      if (dim === 'column') {
+        this.rotateColumn(id, amountStr);
+      } else if (dim === 'row') {
+        this.rotateRow(id, amountStr);
       }
     }
+
+  this.runRect = (args) => {
+    let dimensions = args.split('x');
+    let x = parseInt(dimensions[0]);
+    let y = parseInt(dimensions[1]);
+    this.setRect(x,y);
   }
 
   this.solve = (input) => {
     this.initialize(50,6);
-    var commands = input.split('\n');
-    for(var i = 0; i < commands.length; ++i) {
-      var cmd = commands[i];
+    let commands = input.split('\n');
+    for(let i = 0; i < commands.length; ++i) {
+      let cmd = commands[i];
       this.runCommand(cmd);
     }
 
@@ -103,6 +118,7 @@ module.exports = function() {
     let input = fs.readFileSync('advents/input/8.txt', 'utf8');
     let result = this.solve(input);
     console.log("8a: number of pixels: " + result);
+    console.log("8b: display:");
     this.screen.forEach((row) => {
       console.log(row.join(' '));
     })

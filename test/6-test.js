@@ -1,150 +1,127 @@
-var assert = require('assert');
-var sol = require('../advents/6.js');
+let assert = require('assert');
+let sol = require('../advents/6.js');
 describe('6.js', () => {
-  describe('convertToCharCount', () => {
-    it('should return [ {a:1}, {b:1} ] for "ab"', () => {
-      var s = new sol();
-      var input = 'ab';
-      var expected = [ {a:1}, {b:1} ];
-      var output = s.convertToCharCount(input);
-      assert.deepEqual(output, expected);
-    });
-    it('should return [ {b:1}, {a:1} ] for "ab"', () => {
-      var s = new sol();
-      var input = 'ba';
-      var expected = [ {b:1}, {a:1} ];
-      var output = s.convertToCharCount(input);
-      assert.deepEqual(output, expected);
-    });
-    it('should return [ { v: 1 }, { r: 1 }, { o: 1 }, { o: 1 }, { o: 1 }, { m: 1 } ] for vroooom', () => {
-      var s = new sol();
-      var input = 'vrooom';
-      var expected = [ { v: 1 }, { r: 1 }, { o: 1 }, { o: 1 }, { o: 1 }, { m: 1 } ];
-      var output = s.convertToCharCount(input);
-      assert.deepEqual(output, expected);
-    });
-  });
   describe('addOccurrences', () => {
     it('should return [{a:1}] for input [], "a"', () => {
-      var s = new sol();
-      var input1 = [];
-      var input2 = 'a';
-      var expected = [{a:1}];
-      var output = s.addOccurrences(input1, input2);
+      let s = new sol();
+      let input1 = [];
+      let input2 = 'a';
+      let expected = [{a:1}];
+      let output = s.addOccurrences(input1, input2);
       assert.deepEqual(output, expected);
     });
 
     it('should return [{a:2}] for input [{a:1}], "a"', () => {
-      var s = new sol();
-      var input1 = [{a:1}];
-      var input2 = 'a';
-      var expected = [{a:2}];
-      var output = s.addOccurrences(input1, input2);
+      let s = new sol();
+      let input1 = [{a:1}];
+      let input2 = 'a';
+      let expected = [{a:2}];
+      let output = s.addOccurrences(input1, input2);
       assert.deepEqual(output, expected);
     });
     it('should return [{a:1, b:1}] for input "[{a:1}]", "b"', () => {
-      var s = new sol();
-      var input1 = [{a:1}];
-      var input2 = 'b';
-      var expected = [{a:1, b:1}];
-      var output = s.addOccurrences(input1, input2);
+      let s = new sol();
+      let input1 = [{a:1}];
+      let input2 = 'b';
+      let expected = [{a:1, b:1}];
+      let output = s.addOccurrences(input1, input2);
       assert.deepEqual(output, expected);
     });
   });
 
   describe('sumOccurrences', () => {
     it('should return [{a:1}] for input ["a"]', () => {
-      var s = new sol();
-      var input = ["a"];
-      var expected = [{a:1}];
-      var output = s.sumOccurrences(input);
+      let s = new sol();
+      let input = ["a"];
+      let expected = [{a:1}];
+      let output = s.sumOccurrences(input);
       assert.deepEqual(output, expected);
     });
     it('should return [{a:1, b:1}] for input ["a", "b"]', () => {
-      var s = new sol();
-      var input = ["a", "b"];
-      var expected = [{a:1, b:1}];
-      var output = s.sumOccurrences(input);
+      let s = new sol();
+      let input = ["a", "b"];
+      let expected = [{a:1, b:1}];
+      let output = s.sumOccurrences(input);
       assert.deepEqual(output, expected);
     });
     it('should return [{a:1}, {b:1}] for input ["ab"]', () => {
-      var s = new sol();
-      var input = ["ab"];
-      var expected = [{a:1}, {b:1}];
-      var output = s.sumOccurrences(input);
+      let s = new sol();
+      let input = ["ab"];
+      let expected = [{a:1}, {b:1}];
+      let output = s.sumOccurrences(input);
       assert.deepEqual(output, expected);
     });
     it('should return [{a:2}, {b:2}] for input ["ab", "ab"]', () => {
-      var s = new sol();
-      var input = ["ab", "ab"];
-      var expected = [{a:2}, {b:2}];
-      var output = s.sumOccurrences(input);
+      let s = new sol();
+      let input = ["ab", "ab"];
+      let expected = [{a:2}, {b:2}];
+      let output = s.sumOccurrences(input);
       assert.deepEqual(output, expected);
     });
     it('should return [{a:2}, {b:1}] for input ["ab", "a"]', () => {
-      var s = new sol();
-      var input = ["ab", "a"];
-      var expected = [{a:2}, {b:1}];
-      var output = s.sumOccurrences(input);
+      let s = new sol();
+      let input = ["ab", "a"];
+      let expected = [{a:2}, {b:1}];
+      let output = s.sumOccurrences(input);
       assert.deepEqual(output, expected);
     });
   });
 
   describe('getMostCommonCharAt', () => {
     it('should return "a" for input [{a:1}], 0', () => {
-      var s = new sol();
-      var input1 = [{a:1}];
-      var input2 = 0;
-      var expected = "a";
-      var output = s.getMostCommonCharAt(input1, input2);
+      let s = new sol();
+      let input1 = [{a:1}];
+      let input2 = 0;
+      let expected = "a";
+      let output = s.getMostCommonCharAt(input1, input2);
       assert.equal(output, expected);
     });
     it('should return "b" for input [{b:1}], 0', () => {
-      var s = new sol();
-      var input1 = [{b:1}];
-      var input2 = 0;
-      var expected = "b";
-      var output = s.getMostCommonCharAt(input1, input2);
+      let s = new sol();
+      let input1 = [{b:1}];
+      let input2 = 0;
+      let expected = "b";
+      let output = s.getMostCommonCharAt(input1, input2);
       assert.equal(output, expected);
     });
     it('should return "b" for input [{a:1, b:2}], 0', () => {
-      var s = new sol();
-      var input1 = [{a:1, b:2}];
-      var input2 = 0;
-      var expected = "b";
-      var output = s.getMostCommonCharAt(input1, input2);
+      let s = new sol();
+      let input1 = [{a:1, b:2}];
+      let input2 = 0;
+      let expected = "b";
+      let output = s.getMostCommonCharAt(input1, input2);
       assert.equal(output, expected);
     });
   });
 
   describe('getLeastCommonCharAt', () => {
     it('should return "a" for input [{a:1, b:2}], 0', () => {
-      var s = new sol();
-      var input1 = [{a:1, b:2}];
-      var input2 = 0;
-      var expected = "a";
-      var output = s.getLeastCommonCharAt(input1, input2);
+      let s = new sol();
+      let input1 = [{a:1, b:2}];
+      let input2 = 0;
+      let expected = "a";
+      let output = s.getLeastCommonCharAt(input1, input2);
       assert.equal(output, expected);
     });
   });
   describe('getAverageString', () => {
     it('should return "a" for input ["a"]', () => {
-      var s = new sol();
-      var input = ["a"];
-      var expected = "a";
-      var output = s.getAverageString(input);
+      let s = new sol();
+      let input = ["a"];
+      let expected = "a";
+      let output = s.getAverageString(input);
       assert.equal(output, expected);
     });
     it('should return "b" for input ["a", "b", "b"]', () => {
-      var s = new sol();
-      var input = ["a", "b", "b"];
-      var expected = "b";
-      var output = s.getAverageString(input);
+      let s = new sol();
+      let input = ["a", "b", "b"];
+      let expected = "b";
+      let output = s.getAverageString(input);
       assert.equal(output, expected);
     });
     it('should return "easter" for example input', () => {
-      var s = new sol();
-      var input = ["eedadn",
+      let s = new sol();
+      let input = ["eedadn",
             "drvtee",
             "eandsr",
             "raavrd",
@@ -161,13 +138,13 @@ describe('6.js', () => {
             "dvrsen",
             "enarar"
       ];
-      var expected = "easter";
-      var output = s.getAverageString(input);
+      let expected = "easter";
+      let output = s.getAverageString(input);
       assert.equal(output, expected);
     });
     it('should return "advent" for example input', () => {
-      var s = new sol();
-      var input = ["eedadn",
+      let s = new sol();
+      let input = ["eedadn",
             "drvtee",
             "eandsr",
             "raavrd",
@@ -184,8 +161,8 @@ describe('6.js', () => {
             "dvrsen",
             "enarar"
       ];
-      var expected = "advent";
-      var output = s.getAverageString(input, true);
+      let expected = "advent";
+      let output = s.getAverageString(input, true);
       assert.equal(output, expected);
 
     })

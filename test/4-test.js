@@ -1,98 +1,98 @@
-var assert = require('assert');
-var sol = require('../advents/4.js');
+let assert = require('assert');
+let sol = require('../advents/4.js');
 
 describe('4.js', () => {
   describe('isRealRoom()', () => {
     it('should return true on input "aaaaa-bbb-z-y-x-123[abxyz]"', () => {
-    	var s = new sol();
-    	var input = "aaaaa-bbb-z-y-x-123[abxyz]";
-    	var expected = true;
-    	var result = s.isRealRoom(input);
+    	let s = new sol();
+    	let input = "aaaaa-bbb-z-y-x-123[abxyz]";
+    	let expected = true;
+    	let result = s.isRealRoom(input);
     	assert.equal(expected, result);
 		});
     it('should return true on input "a-b-c-d-e-f-g-h-987[abcde]"', () => {
-    	var s = new sol();
-    	var input = "a-b-c-d-e-f-g-h-987[abcde]";
-    	var expected = true;
-    	var result = s.isRealRoom(input);
+    	let s = new sol();
+    	let input = "a-b-c-d-e-f-g-h-987[abcde]";
+    	let expected = true;
+    	let result = s.isRealRoom(input);
     	assert.equal(expected, result);
 		});
     it('should return false on input "aaaaa-bbb-z-y-x-123[abxyz]"', () => {
-    	var s = new sol();
-    	var input = "totally-real-room-200[decoy]";
-    	var expected = false;
-    	var result = s.isRealRoom(input);
+    	let s = new sol();
+    	let input = "totally-real-room-200[decoy]";
+    	let expected = false;
+    	let result = s.isRealRoom(input);
     	assert.equal(expected, result);
 		});
 	});
 
 	describe('getEncryptedName()', () => {
 		it('should return abc on input "abc-123', () => {
-			var s = new sol();
-			var input = "abc-123";
+			let s = new sol();
+			let input = "abc-123";
 
-			var expected = "abc";
-			var result = s.getEncryptedName(input);
+			let expected = "abc";
+			let result = s.getEncryptedName(input);
 			assert.equal(expected, result);
 		});
 
 		it("should return abc-123 on input abc-123-234[xyx]", () => {
-			var s = new sol();
-			var input = "abc-123-234[xyx]";
-			var expected = "abc-123";
+			let s = new sol();
+			let input = "abc-123-234[xyx]";
+			let expected = "abc-123";
 
-			var result = s.getEncryptedName(input);
+			let result = s.getEncryptedName(input);
 			assert.equal(expected, result);
 		})
 	});
 
 	describe('getChecksum()', () => {
 		it('should return xyz on input abc-123-234[xyz]', () => {
-			var s = new sol();
-			var input = "abc-123-234[xyz]";
-			var expected = "xyz";
+			let s = new sol();
+			let input = "abc-123-234[xyz]";
+			let expected = "xyz";
 
-			var result = s.getChecksum(input);
+			let result = s.getChecksum(input);
 			assert.equal(expected, result);			
 		});
 	});
 
 	describe('getSortedTally', () => {
 		it('should return "abc" for input {a:3, b:2, c:1}', () => {
-			var s = new sol();
-			var input = {a:3, b:2, c:1};
-			var expected = "abc";
+			let s = new sol();
+			let input = {a:3, b:2, c:1};
+			let expected = "abc";
 
-			var result = s.getSortedTally(input);
+			let result = s.getSortedTally(input);
 			assert.equal(expected, result);			
 		})
 
 		it('should return "abc" for input {a:1, b:1, c:1}', () => {
-			var s = new sol();
-			var input = {a:1, b:1, c:1};
-			var expected = "abc";
+			let s = new sol();
+			let input = {a:1, b:1, c:1};
+			let expected = "abc";
 
-			var result = s.getSortedTally(input);
+			let result = s.getSortedTally(input);
 			assert.equal(expected, result);			
 		});
 
 		it('should return "cba" for input {a:1, b:2, c:3}', () => {
-			var s = new sol();
-			var input = {a:1, b:2, c:3};
-			var expected = "cba";
+			let s = new sol();
+			let input = {a:1, b:2, c:3};
+			let expected = "cba";
 
-			var result = s.getSortedTally(input);
+			let result = s.getSortedTally(input);
 			assert.equal(expected, result);			
 		})
 	})
 
 	describe('mergeSort()', () => {
 		it('should return [1] on input [1]', () => {
-			var s = new sol();
-			var input = [{char:"a", val:1}];
-			var expected = [{char:"a", val:1}];
+			let s = new sol();
+			let input = [{char:"a", val:1}];
+			let expected = [{char:"a", val:1}];
 
-			var result = s.mergeSort(input);
+			let result = s.mergeSort(input);
 
 			assert.deepEqual(result, expected)
 
@@ -101,12 +101,12 @@ describe('4.js', () => {
 
 	describe('merge()', () => {
 		it('should return [1] on input([1],[]', () => {
-			var s = new sol();
-			var input1 = [{char:"a", val:1}];
-			var input2 = [];
-			var expected = [{char:"a", val:1}];
+			let s = new sol();
+			let input1 = [{char:"a", val:1}];
+			let input2 = [];
+			let expected = [{char:"a", val:1}];
 
-			var result = s.merge(input1, input2);
+			let result = s.merge(input1, input2);
 
 			assert.deepEqual(result, expected)
 
@@ -115,17 +115,17 @@ describe('4.js', () => {
 
 	describe('merge()', () => {
 		it('should return [4321] on input([1,4],[2,3]', () => {
-			var s = new sol();
-			var input1 = [{char:"d", val:4}, {char:"a", val:1}];
-			var input2 = [{char:"c", val:3}, {char:"b", val:2}];
-			var expected = [
+			let s = new sol();
+			let input1 = [{char:"d", val:4}, {char:"a", val:1}];
+			let input2 = [{char:"c", val:3}, {char:"b", val:2}];
+			let expected = [
 				{char:"d", val:4},
 				{char:"c", val:3},
 				{char:"b", val:2},
 				{char:"a", val:1}
 			];
 
-			var result = s.merge(input1, input2);
+			let result = s.merge(input1, input2);
 
 			assert.deepEqual(result, expected)
 
@@ -134,12 +134,12 @@ describe('4.js', () => {
 
 	describe('sortTallyArray', () => {
 		it('should return [a,b,c] for input [a:1, b:1, c:1]', () =>{
-			var s = new sol();
-			var input = [{char:"a", val:1}
+			let s = new sol();
+			let input = [{char:"a", val:1}
 			, {char:"b", val:1}, {char: "c", val: 1}];
-			var expected = "abc";
+			let expected = "abc";
 
-			var result = s.sortTallyArray(input);
+			let result = s.sortTallyArray(input);
 			assert.equal(expected, result);			
 
 		})
@@ -147,20 +147,20 @@ describe('4.js', () => {
 
 	describe('getTalliedCharacters()', () => {
 		it('should return {a:1, b:2, c:1} for input abcb', () => {
-			var s = new sol();
-			var input = "abcb";
-			var expected = {a:1, b:2, c:1};
+			let s = new sol();
+			let input = "abcb";
+			let expected = {a:1, b:2, c:1};
 
-			var result = s.getTalliedCharacters(input);
+			let result = s.getTalliedCharacters(input);
 			assert.deepEqual(expected, result);			
 		});
 
 		it('should return {a:1, b:2} for input a-b', () => {
-			var s = new sol();
-			var input = "a-b";
-			var expected = {a:1, b:1};
+			let s = new sol();
+			let input = "a-b";
+			let expected = {a:1, b:1};
 
-			var result = s.getTalliedCharacters(input);
+			let result = s.getTalliedCharacters(input);
 			assert.deepEqual(expected, result);			
 
 		})
@@ -168,66 +168,66 @@ describe('4.js', () => {
 
 	describe('getSectorId()', () => {
 		it('should return 234 on input abc-123-234[xyx]', () => {
-			var s = new sol();
-			var input = "abc-123-234[xyx]";
-			var expected = "234";
+			let s = new sol();
+			let input = "abc-123-234[xyx]";
+			let expected = "234";
 
-			var result = s.getSectorId(input);
+			let result = s.getSectorId(input);
 			assert.equal(expected, result);
 		})
 	});
 
 	describe('cipherWordWith', () => {
 		it('should return bcd for inputs abc, 1', () => {
-			var s = new sol();
-			var cipher = "abc";
-			var shift = 1;
-			var expected = "bcd";
+			let s = new sol();
+			let cipher = "abc";
+			let shift = 1;
+			let expected = "bcd";
 
-			var result = s.cipherWordWith(cipher, shift);
+			let result = s.cipherWordWith(cipher, shift);
 			assert.equal(expected, result);
 
 		})
 
 		it('should return ghi for inputs abc, 6', () => {
-			var s = new sol();
-			var cipher = "abc";
-			var shift = 6;
-			var expected = "ghi";
+			let s = new sol();
+			let cipher = "abc";
+			let shift = 6;
+			let expected = "ghi";
 
-			var result = s.cipherWordWith(cipher, shift);
+			let result = s.cipherWordWith(cipher, shift);
 			assert.equal(expected, result);
 
 		})
 
 		it('should return "very encrypted name" for inputs qzmt-zixmtkozy-ivhz, 343', () => {
-			var s = new sol();
-			var cipher = "qzmt-zixmtkozy-ivhz";
-			var shift = 343;
-			var expected = "very encrypted name";
+			let s = new sol();
+			let cipher = "qzmt-zixmtkozy-ivhz";
+			let shift = 343;
+			let expected = "very encrypted name";
 
-			var result = s.cipherWordWith(cipher, shift);
+			let result = s.cipherWordWith(cipher, shift);
 			assert.equal(expected, result);
 
 		})
 
 		it('should return gh i for inputs ab-c, 6', () => {
-			var s = new sol();
-			var cipher = "abc";
-			var shift = 6;
-			var expected = "ghi";
+			let s = new sol();
+			let cipher = "abc";
+			let shift = 6;
+			let expected = "ghi";
 
-			var result = s.cipherWordWith(cipher, shift);
+			let result = s.cipherWordWith(cipher, shift);
 			assert.equal(expected, result);
 		})
 
 		it('should return ghi for inputs abc, 32', () => {
-			var s = new sol();
-			var cipher = "abc";
-			var shift = 32;
-			var expected = "ghi";
+			let s = new sol();
+			let cipher = "abc";
+			let shift = 32;
+			let expected = "ghi";
 
-			var result = s.cipherWordWith(cipher, shift);
+			let result = s.cipherWordWith(cipher, shift);
 			assert.equal(expected, result);
 
 		})
@@ -235,11 +235,11 @@ describe('4.js', () => {
 
 	describe('decryptName()', () => {
 		it('should return "very encrypted name" for input qzmt-zixmtkozy-ivhz-343[xyz]', () => {
-			var s = new sol();
-			var roomName = "qzmt-zixmtkozy-ivhz-343[xyz]";
-			var expected = "very encrypted name";
+			let s = new sol();
+			let roomName = "qzmt-zixmtkozy-ivhz-343[xyz]";
+			let expected = "very encrypted name";
 
-			var result = s.decryptName(roomName);
+			let result = s.decryptName(roomName);
 			assert.equal(expected, result);
 		})
 	})

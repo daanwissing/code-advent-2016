@@ -1,31 +1,21 @@
 const fs = require('fs');
 
 module.exports = function() {
-  this.convertToCharCount = (string) => {
-    var output = [];
-    for (var i = string.length - 1; i >= 0; i--) {
-      let char = string[i];
-      let block = {};
-      block[char] = 1;
-      output[i] = block;
-    }
-    return output;
-  };
 
-  this.addOccurrences = (charCount, inputString) => {
-    for(var i = 0; i < inputString.length; ++i) {
-      if (charCount[i] === undefined || charCount[i] === null) {
-        charCount[i] = {};
+  this.addOccurrences = (stringTally, inputString) => {
+    for(let i = 0; i < inputString.length; ++i) {
+      if (stringTally[i] === undefined || stringTally[i] === null) {
+        stringTally[i] = {};
       }
-      let count = charCount[i];
+      let positionTally = stringTally[i];
       let inputChar = inputString[i];
-      if (count[inputChar] !== undefined) {
-        count[inputChar]++;
+      if (positionTally[inputChar] !== undefined) {
+        positionTally[inputChar]++;
       } else {
-        count[inputChar] = 1;
+        positionTally[inputChar] = 1;
       }
     }
-    return charCount;
+    return stringTally;
   };
 
   this.sumOccurrences = (strings) => {
@@ -34,13 +24,13 @@ module.exports = function() {
     }, []);
   };
 
-  this.getLeastCommonCharAt = (charCount, index) => {
-    var count = charCount[index];
-    var min = Number.MAX_VALUE;
-    var foundChar = '_';
-    for(var char in count) {
-      if (count[char] < min) {
-        min = count[char];
+  this.getLeastCommonCharAt = (stringTally, index) => {
+    let positionTally = stringTally[index];
+    let min = Number.MAX_VALUE;
+    let foundChar = '_';
+    for(let char in positionTally) {
+      if (positionTally[char] < min) {
+        min = positionTally[char];
         foundChar = char;
       }
     }
@@ -48,12 +38,12 @@ module.exports = function() {
   };
 
   this.getMostCommonCharAt = (charCount, index) => {
-    var count = charCount[index];
-    var max = 0;
-    var foundChar = '_';
-    for(var char in count) {
-      if (count[char] > max) {
-        max = count[char];
+    let positionTally = charCount[index];
+    let max = 0;
+    let foundChar = '_';
+    for(let char in positionTally) {
+      if (positionTally[char] > max) {
+        max = positionTally[char];
         foundChar = char;
       }
     }
@@ -61,12 +51,12 @@ module.exports = function() {
   };
 
   this.getAverageString = (strings, least) => {
-    var totalCounts = this.sumOccurrences(strings);
-    var commonChars = totalCounts.map((count, index) => {
+    let totalTally = this.sumOccurrences(strings);
+    let commonChars = totalTally.map((count, index) => {
       if (least) {
-        return this.getLeastCommonCharAt(totalCounts, index);
+        return this.getLeastCommonCharAt(totalTally, index);
       } else {
-        return this.getMostCommonCharAt(totalCounts, index);
+        return this.getMostCommonCharAt(totalTally, index);
       }
     });
 
@@ -82,7 +72,7 @@ module.exports = function() {
   }
 
   this.solve = (input, least) => {
-    var strings = input.split('\n');
+    let strings = input.split('\n');
     return this.getAverageString(strings, least);
   }
 

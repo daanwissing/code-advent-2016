@@ -13,11 +13,11 @@ module.exports = function () {
 	}
 
 	this.solve = (rooms) => {
-		var roomNames = rooms.split('\n');
-		var sectorSum = 0;
+		let roomNames = rooms.split('\n');
+		let sectorSum = 0;
 		roomNames.forEach((roomName) => {
 			if (this.isRealRoom(roomName)) {
-				var sectorId = this.getSectorId(roomName);
+				let sectorId = this.getSectorId(roomName);
 				if (this.decryptName(roomName) === 'northpole object storage'){
 					this.roomId = sectorId;
 				}
@@ -29,11 +29,11 @@ module.exports = function () {
 	}
 
 	this.isRealRoom = (roomName) => {
-		var encryptedName = this.getEncryptedName(roomName);
-		var checkSum = this.getChecksum(roomName);
-		var tally = this.getTalliedCharacters(encryptedName);
-		var sorted = this.getSortedTally(tally);
-		var sub = sorted.substr(0,5);
+		let encryptedName = this.getEncryptedName(roomName);
+		let checkSum = this.getChecksum(roomName);
+		let tally = this.getTalliedCharacters(encryptedName);
+		let sorted = this.getSortedTally(tally);
+		let sub = sorted.substr(0,5);
 		return checkSum == sub;
 	}
 
@@ -42,21 +42,21 @@ module.exports = function () {
 	}
 
 	this.getSectorId = (roomName) => {
-		var split = roomName.split("-");
-		var tail = split[split.length - 1];
+		let split = roomName.split("-");
+		let tail = split[split.length - 1];
 		return parseInt(tail.substr(0,tail.indexOf("[")));
 	}
 
 	this.getChecksum = (roomName) => {
-		var split = roomName.split("-");
-		var tail = split[split.length - 1];
+		let split = roomName.split("-");
+		let tail = split[split.length - 1];
 		return tail.substring(tail.indexOf("[") + 1, tail.indexOf("]"));
 	}
 
 	this.getTalliedCharacters = (word) => {
-		var result = {};
+		let result = {};
 
-		for(var char of word) {
+		for(let char of word) {
 			if (!char.match(/[a-zA-Z]/)) continue;
 			if (result[char] == undefined) result[char] = 0;
 			result[char]++;
@@ -65,8 +65,8 @@ module.exports = function () {
 	}
 
 	this.getSortedTally = (tally) => {
-		var tallyArray = []
-		for(var attribute in tally) {
+		let tallyArray = []
+		for(let attribute in tally) {
 			if (tally.hasOwnProperty(attribute)) {
 				tallyArray.push({
 					char: attribute,
@@ -78,8 +78,8 @@ module.exports = function () {
 	}
 
 	this.sortTallyArray = (tallyArray) => {
-		var sortedTally = this.mergeSort(tallyArray);
-		var result = "";
+		let sortedTally = this.mergeSort(tallyArray);
+		let result = "";
 		sortedTally.forEach((item) => {
 			result += item.char;
 		})
@@ -89,8 +89,8 @@ module.exports = function () {
 
 	this.mergeSort = (array) => {
 		if (array.length > 1) {
-			var array1 = array.slice(0, array.length / 2);
-			var array2 = array.slice(array.length / 2);
+			let array1 = array.slice(0, array.length / 2);
+			let array2 = array.slice(array.length / 2);
 			return this.merge(this.mergeSort(array1), this.mergeSort(array2))
 		}
 
@@ -98,9 +98,9 @@ module.exports = function () {
 	}
 
 	this.merge = (array1, array2) => {
-		var i = 0;
-		var j = 0;
-		var result = [];
+		let i = 0;
+		let j = 0;
+		let result = [];
 		while((i + j) < (array1.length + array2.length)) {
 
 			if (j >= array2.length) {
@@ -132,22 +132,22 @@ module.exports = function () {
 	}
 
 	this.decryptName = (roomName) => {
-		var encryptedName = this.getEncryptedName(roomName);
-		var shift = this.getSectorId(roomName);
+		let encryptedName = this.getEncryptedName(roomName);
+		let shift = this.getSectorId(roomName);
 		return this.cipherWordWith(encryptedName, shift);
 	}
 
 	this.cipherWordWith = (cipher, shift) => {
-		var alphabet = "abcdefghijklmnopqrstuvwxyz";
-		var cipheredText = "";
-		for (var char of cipher) {
-			var currentAlphabetIndex = alphabet.indexOf(char);
+		let alphabet = "abcdefghijklmnopqrstuvwxyz";
+		let cipheredText = "";
+		for (let char of cipher) {
+			let currentAlphabetIndex = alphabet.indexOf(char);
 			if (currentAlphabetIndex < 0) {
 				cipheredText += " ";
 				continue;
 			}
 
-			var nextAlphabetIndex = (currentAlphabetIndex + shift) % alphabet.length;
+			let nextAlphabetIndex = (currentAlphabetIndex + shift) % alphabet.length;
 			cipheredText += alphabet[nextAlphabetIndex];
 		}
 

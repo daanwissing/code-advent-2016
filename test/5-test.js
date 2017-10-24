@@ -1,38 +1,38 @@
-var assert = require('assert');
-var sol = require('../advents/5.js');
+let assert = require('assert');
+let sol = require('../advents/5.js');
 
 describe('5.js', () => {
   describe('md5', () => {
     it('should return 098f6bcd4621d373cade4e832627b4f6 on "test"', ()=> {
-      var s = new sol();
-      var input = "test";
-      var output = s.md5(input);
-      var expected = "098f6bcd4621d373cade4e832627b4f6";
+      let s = new sol();
+      let input = "test";
+      let output = s.md5(input);
+      let expected = "098f6bcd4621d373cade4e832627b4f6";
       assert.equal(expected, output);
     });
   });
   describe('isInterestingHash', () => {
     it('should return true on 00000a', () => {
-      var s = new sol();
-      var input = "00000a";
-      var output = s.isInterestingHash(input);
-      var expected = true;
+      let s = new sol();
+      let input = "00000a";
+      let output = s.isInterestingHash(input);
+      let expected = true;
       assert.equal(expected, output);
     });
     it('should return false on 10000a', () => {
-      var s = new sol();
-      var input = "10000a";
-      var output = s.isInterestingHash(input);
-      var expected = false;
+      let s = new sol();
+      let input = "10000a";
+      let output = s.isInterestingHash(input);
+      let expected = false;
       assert.equal(expected, output);
     });
   });
   xdescribe('getPassword', () => {
     it('should return "1" for door "abc" and length 1', () => {
-      var s = new sol();
-      var input = "abc";
-      var output = s.getPassword(input, 1);
-      var expected = "1";
+      let s = new sol();
+      let input = "abc";
+      let output = s.getPassword(input, 1);
+      let expected = "1";
       assert.equal(expected, output);
     }).timeout(50000);
   })

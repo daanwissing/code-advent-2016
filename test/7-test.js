@@ -1,5 +1,5 @@
-var assert = require('assert');
-var sol = require('../advents/7.js');
+let assert = require('assert');
+let sol = require('../advents/7.js');
 
 describe('7.js', () => {
   describe('isAbba', () => {
